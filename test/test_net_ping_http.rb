@@ -23,6 +23,12 @@ class TC_Net_Ping_HTTP < Test::Unit::TestCase
     FakeWeb.register_uri(:head, @uri, :body => "PONG")
     FakeWeb.register_uri(:head, @uri_https, :body => "PONG")
     FakeWeb.register_uri(:get, @uri_https, :body => "PONG")
+    FakeWeb.register_uri(:get, "http://#{@uri_http_domain}", :body => "PONG")
+    FakeWeb.register_uri(:head, "http://#{@uri_http_domain}", :body => "PONG")
+    FakeWeb.register_uri(:get, @uri_http_domain_scheme, :body => "PONG")
+    FakeWeb.register_uri(:head, @uri_http_domain_scheme, :body => "PONG")
+    FakeWeb.register_uri(:get, @uri_http_domain_schemes, :body => "PONG")
+    FakeWeb.register_uri(:head, @uri_http_domain_schemes, :body => "PONG")
     FakeWeb.register_uri(:head, "http://jigsaw.w3.org/HTTP/300/302.html",
                          :body => "PONG",
                          :location => "#{@uri}",
