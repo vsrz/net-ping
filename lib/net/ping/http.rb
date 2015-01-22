@@ -79,7 +79,7 @@ module Net
       bool = false
 
       # See https://bugs.ruby-lang.org/issues/8645
-      host = "http://#{host}" unless host.include?("http")
+      host = "http://#{host}" unless /\A(http(s)?:\/\/)/.match(host)
 
       uri = URI.parse(host)
 
