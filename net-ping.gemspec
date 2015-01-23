@@ -3,11 +3,11 @@ require 'rbconfig'
 
 Gem::Specification.new do |spec|
   spec.name      = 'net-ping'
-  spec.version   = '1.7.6'
+  spec.version   = '1.7.7'
   spec.license   = 'Artistic 2.0'
-  spec.author    = 'Daniel J. Berger'
-  spec.email     = 'djberg96@gmail.com'
-  spec.homepage  = 'https://github.com/djberg96/net-ping'
+  spec.author    = 'Chris Chernesky'
+  spec.email     = 'chris.netping@tinderglow.com'
+  spec.homepage  = 'https://github.com/chernesk/net-ping'
   spec.summary   = 'A ping interface for Ruby.'
   spec.test_file = 'test/test_net_ping.rb'
   spec.files     = Dir['**/*'].reject{ |f| f.include?('git') }
