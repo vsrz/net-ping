@@ -13,6 +13,9 @@ class TC_Net_Ping_HTTP < Test::Unit::TestCase
     ENV['http_proxy'] = ENV['https_proxy'] = ENV['no_proxy'] = nil
     @uri = 'http://www.google.com/index.html'
     @uri_https = 'https://encrypted.google.com'
+    @uri_http_domain = 'http.com'
+    @uri_http_domain_scheme = 'http://http.com'
+    @uri_http_domain_schemes = 'https://http.com'
     @proxy = 'http://username:password@proxymoxie:3128'
     FakeWeb.allow_net_connect = false
 
@@ -20,6 +23,12 @@ class TC_Net_Ping_HTTP < Test::Unit::TestCase
     FakeWeb.register_uri(:head, @uri, :body => "PONG")
     FakeWeb.register_uri(:head, @uri_https, :body => "PONG")
     FakeWeb.register_uri(:get, @uri_https, :body => "PONG")
+    FakeWeb.register_uri(:get, "http://#{@uri_http_domain}", :body => "PONG")
+    FakeWeb.register_uri(:head, "http://#{@uri_http_domain}", :body => "PONG")
+    FakeWeb.register_uri(:get, @uri_http_domain_scheme, :body => "PONG")
+    FakeWeb.register_uri(:head, @uri_http_domain_scheme, :body => "PONG")
+    FakeWeb.register_uri(:get, @uri_http_domain_schemes, :body => "PONG")
+    FakeWeb.register_uri(:head, @uri_http_domain_schemes, :body => "PONG")
     FakeWeb.register_uri(:head, "http://jigsaw.w3.org/HTTP/300/302.html",
                          :body => "PONG",
                          :location => "#{@uri}",
@@ -31,12 +40,30 @@ class TC_Net_Ping_HTTP < Test::Unit::TestCase
                          :status => ["502", "Bad Gateway"])
 
     @http = Net::Ping::HTTP.new(@uri, 80, 30)
+    @http_http_domain = Net::Ping::HTTP.new(@uri_http_domain, 80, 30)
+    @http_http_domain_scheme = Net::Ping::HTTP.new(@uri_http_domain_scheme, 80, 30)
+    @http_http_domain_schemes = Net::Ping::HTTP.new(@uri_http_domain_schemes, 80, 30)
     @bad  = Net::Ping::HTTP.new('http://www.blabfoobarurghxxxx.com') # One hopes not
   end
 
   test 'ping basic functionality' do
     assert_respond_to(@http, :ping)
     assert_nothing_raised{ @http.ping }
+  end
+
+  test 'ping site with http in domain' do
+    assert_respond_to(@http_http_domain, :ping)
+    assert_nothing_raised{ @http_http_domain.ping }
+  end
+
+  test 'ping site with http in domain and http scheme' do
+    assert_respond_to(@http_http_domain_scheme, :ping)
+    assert_nothing_raised{ @http_http_domain_scheme.ping }
+  end
+
+  test 'ping site with http in domain and https scheme' do
+    assert_respond_to(@http_http_domain_schemes, :ping)
+    assert_nothing_raised{ @http_http_domain_schemes.ping }
   end
 
   test 'ping returns a boolean value' do

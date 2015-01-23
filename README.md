@@ -1,7 +1,7 @@
-== Description
-  A collection of classes that provide different ways to ping computers.
+# net-ping
+A collection of classes that provide different ways to ping computers.
 
-== Prerequisites
+## Prerequisites
   * ffi
   * win32-security (MS Windows only)
   * fakeweb (test only)
@@ -10,29 +10,30 @@
   Ruby users should use Ruby 1.9.3 or later.
   JRuby users should use JRuby 1.6.7 or later.
 
-== Installation
-  gem install net-ping
+## Installation
+  ```gem install net-ping```
 
-== Notes
+## Notes
   Please read the documentation under the 'doc' directory. Especially pay
   attention to the documentation pertaining to ECONNREFUSED and TCP pings.
 
   Also note the documentation regarding down hosts.
-== How to require net-ping
+
+## How to require net-ping
   You can do either this:
 
-  require 'net/ping'
+  ```require 'net/ping'```
 
   In which case you will get Net::Ping and all of its subclasses. Or,
   you can load individual subclasses like this:
 
-  require 'net/ping/tcp'
+  ```require 'net/ping/tcp'```
 
   The former has the advantage of being easier to remember and all inclusive,
   not to mention backwards compatible. The latter has the advantage of
   reducing your memory footprint.
-   
-== Known Issues
+
+## Known Issues
   Older versions of Ruby 1.9.x may not work with UDP pings.
 
   Older versions of JRuby will return false positives in UDP pings
@@ -44,19 +45,19 @@
   ICMP pings will not work with JRuby without some sort of third-party
   library support for raw sockets in Java, such as RockSaw.
 
-== License
+## License
   Artistic 2.0
 
-== Contributions
+## Contributions
   Although this library is free, please consider having your company
   setup a gittip if used by your company professionally.
 
   http://www.gittip.com/djberg96/
-   
-== More documentation
+
+## More documentation
   If you installed this library via Rubygems, you can view the inline
   documentation via ri or fire up 'gem server', and point your browser at
   http://localhost:8808.
 
-== Author
+## Author
   Daniel J. Berger
