@@ -1,3 +1,6 @@
+== 1.7.7 - 22-Jan-2015
+* Pull request #1 from Mike George. This fixes domains which have http in them.
+
 == 1.7.6 - 13-Dec-2014
 * Changed TCP handling yet again, as it was returning false positives. Thanks
   go to Marcos Piccinini for the spot.

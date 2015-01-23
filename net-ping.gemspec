@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.test_file = 'test/test_net_ping.rb'
   spec.files     = Dir['**/*'].reject{ |f| f.include?('git') }
 
-  spec.extra_rdoc_files  = ['README', 'CHANGES', 'doc/ping.txt']
+  spec.extra_rdoc_files  = ['README.md', 'CHANGES', 'doc/ping.txt']
 
   # The TCP Ping class requires this for non-blocking sockets.
   spec.required_ruby_version = ">= 1.9.3"
