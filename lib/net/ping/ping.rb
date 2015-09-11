@@ -83,6 +83,13 @@ module Net
          @duration  = nil
       end
 
+      def ping6(host = @host)
+         raise ArgumentError, 'no host specified' unless host
+         @exception = nil
+         @warning   = nil
+         @duration  = nil
+      end
+
       alias ping? ping
       alias pingecho ping
    end
