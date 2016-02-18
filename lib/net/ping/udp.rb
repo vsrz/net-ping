@@ -113,7 +113,5 @@ module Net
       bool
     end
 
-    alias ping? ping
-    alias pingecho ping
   end
 end

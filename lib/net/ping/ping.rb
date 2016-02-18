@@ -89,8 +89,12 @@ module Net
          @warning   = nil
          @duration  = nil
       end
-
-      alias ping? ping
+ 
+      def ping?(host = @host)
+        !!ping(host)
+      end
+       
       alias pingecho ping
+
    end
 end

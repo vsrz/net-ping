@@ -71,12 +71,12 @@ class TC_Net_Ping_HTTP < Test::Unit::TestCase
     assert_boolean(@bad.ping?)
   end
 
-  test 'ping? is an alias for ping' do
-    assert_alias_method(@http, :ping?, :ping)
+  test "ping? is inherited" do
+    assert_respond_to(@http, :ping?)
   end
 
-  test 'pingecho is an alias for ping' do
-    assert_alias_method(@http, :pingecho, :ping)
+  test "pingecho is inherited" do
+    assert_respond_to(@http, :pingecho)
   end
 
   test 'ping should succeed for a valid website' do

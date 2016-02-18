@@ -147,12 +147,7 @@ module Net
 
       # There is no duration if the ping failed
       @duration = Time.now - start_time if bool
-
-      return bool
     end
-
-    alias ping? ping
-    alias pingecho ping
 
     private
 

@@ -43,16 +43,16 @@ class TC_PingICMP < Test::Unit::TestCase
     assert_nothing_raised{ @icmp.ping(@host) }
   end
 
-  test "icmp ping returns a boolean" do
+  test "icmp ping returns a float" do
     omit_if(@@jruby)
-    assert_boolean(@icmp.ping)
-    assert_boolean(@icmp.ping(@host))
+    assert_kind_of(Float, @icmp.ping)
+    assert_kind_of(Float, @icmp.ping(@host))
   end
 
   test "icmp ping of local host is successful" do
     omit_if(@@jruby)
     assert_true(Net::Ping::ICMP.new(@host).ping?)
-    assert_true(Net::Ping::ICMP.new('192.168.0.1').ping?)
+    assert_true(Net::Ping::ICMP.new('127.0.0.1').ping?)
   end
 
   test "threaded icmp ping returns expected results" do
@@ -78,14 +78,12 @@ class TC_PingICMP < Test::Unit::TestCase
     threads.each{ |t| t.join }
   end
 
-  test "ping? is an alias for ping" do
+  test "ping? is inherited" do
     assert_respond_to(@icmp, :ping?)
-    assert_alias_method(@icmp, :ping?, :ping)
   end
 
-  test "pingecho is an alias for ping" do
+  test "pingecho is inherited" do
     assert_respond_to(@icmp, :pingecho)
-    assert_alias_method(@icmp, :pingecho, :ping)
   end
 
   test "icmp ping fails if host is invalid" do
@@ -171,7 +169,7 @@ class TC_PingICMP < Test::Unit::TestCase
   test "setting an odd data_size is valid" do
     omit_if(@@jruby)
     assert_nothing_raised{ @icmp.data_size = 57 }
-    assert_boolean(@icmp.ping)
+    assert_kind_of(Float, @icmp.ping)
   end
 
   def teardown

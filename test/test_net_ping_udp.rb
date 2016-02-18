@@ -26,14 +26,12 @@ class TC_Net_Ping_UDP < Test::Unit::TestCase
     assert_nothing_raised{ @udp.ping(@host) }
   end
 
-  test "ping? is an alias for ping" do
+  test "ping? is inherited" do
     assert_respond_to(@udp, :ping?)
-    assert_alias_method(@udp, :ping?, :ping)
   end
 
-  test "pingecho is an alias for ping" do
+  test "pingecho is inherited" do
     assert_respond_to(@udp, :pingecho)
-    assert_alias_method(@udp, :pingecho, :ping)
   end
 
   test "a successful udp ping returns true" do
