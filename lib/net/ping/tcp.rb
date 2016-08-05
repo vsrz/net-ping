@@ -38,7 +38,6 @@ module Net
       super(host)
 
       bool = false
-      start_time = Time.now
 
       # Failure here most likely means bad host, so just bail.
       begin
@@ -54,6 +53,8 @@ module Net
 
         # This may not be entirely necessary
         sock.setsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY, 1)
+
+        start_time = Time.now
 
         begin
           # Where addr[0][3] is an IP address
@@ -95,13 +96,9 @@ module Net
 
       # There is no duration if the ping failed
       @duration = Time.now - start_time if bool
-
-      bool
     end
 
-    alias ping? ping
-    alias pingecho ping
-
+  
     # Class method aliases. DEPRECATED.
     class << self
       alias econnrefused service_check

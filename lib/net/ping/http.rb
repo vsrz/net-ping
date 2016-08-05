@@ -131,8 +131,6 @@ module Net
       bool
     end
 
-    alias ping? ping
-    alias pingecho ping
     alias follow_redirect? follow_redirect
     alias uri host
     alias uri= host=
