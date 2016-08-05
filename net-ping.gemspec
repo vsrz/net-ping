@@ -3,7 +3,7 @@ require 'rbconfig'
 
 Gem::Specification.new do |spec|
   spec.name      = 'net-ping'
-  spec.version   = '1.7.7'
+  spec.version   = '2.0.0'
   spec.license   = 'Artistic 2.0'
   spec.author    = 'Chris Chernesky'
   spec.email     = 'chris.netping@tinderglow.com'
@@ -17,9 +17,9 @@ Gem::Specification.new do |spec|
   # The TCP Ping class requires this for non-blocking sockets.
   spec.required_ruby_version = ">= 1.9.3"
 
-  spec.add_development_dependency('test-unit')
-  spec.add_development_dependency('fakeweb')
-  spec.add_development_dependency('rake')
+  spec.add_development_dependency('test-unit', '~> 0')
+  spec.add_development_dependency 'fakeweb~> 0', '~> 0'
+  spec.add_development_dependency('rake', '~> 0')
 
   if File::ALT_SEPARATOR
     require 'rbconfig'
