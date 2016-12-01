@@ -1,3 +1,10 @@
+== 2.0.1 - 5-Aug-2015
+* Fix broken gemspec. PR #9 by @shockwavenn
+
+== 2.0.0 - 5-Aug-2015
+* Add ability to ping ipv6 ip. PR #4 by @deuxclique
+* Minor refactoring of the ping?/pingecho aliases, and fixed a timer glitch in Net::Ping::TCP. PR#7 by @epitron
+
 == 1.7.7 - 22-Jan-2015
 * Pull request #1 from Mike George. This fixes domains which have http in them.
 
