@@ -12,6 +12,13 @@ require_relative 'ping/http'
 
 RbConfig = Config unless Object.const_defined?(:RbConfig)
 
+begin
+  `busybox`
+  RbConfig::CONFIG['busybox'] = true
+rescue Errno::ENOENT
+  RbConfig::CONFIG['busybox'] = false
+end
+
 if File::ALT_SEPARATOR
   require_relative 'ping/wmi'
 end
