@@ -28,7 +28,17 @@ module Net
     # UNIX systems), and the port value is ignored.
     #
     def initialize(host=nil, port=nil, timeout=5)
-      raise 'requires root privileges' if Process.euid > 0
+      begin
+        require 'cap2'
+        current_process = Cap2.process
+        unless Process.euid > 0 \
+          || current_process.permitted?(:net_raw) \
+          && current_process.enabled?(:net_raw)
+          raise StandardError 'requires root privileges or setcap net_raw'
+        end
+      rescue LoadError
+        raise 'requires root privileges or setcap net_raw' if Process.euid > 0
+      end
 
       if File::ALT_SEPARATOR
         unless Win32::Security.elevated_security?
