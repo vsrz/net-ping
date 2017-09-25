@@ -17,8 +17,19 @@ if File::ALT_SEPARATOR
     require 'test_net_ping_icmp'
   end
 else
-  if Process.euid == 0
-    require 'test_net_ping_icmp'
+  # If cap2 is availble, check if we are root, or our process has net_raw,
+  # then include ICMP tests
+  begin
+    require 'cap2'
+    current_process = Cap2.process
+    if Process.euid == 0 \
+      || current_process.permitted?(:net_raw) \
+      && current_process.enabled?(:net_raw)
+      require 'test_net_ping_icmp'
+    end
+  rescue LoadError
+    # If we don't have cap2, include ICMP tests if we are root
+    require 'test_net_ping_icmp' if Process.euid == 0
   end
 end
 

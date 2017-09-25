@@ -16,9 +16,23 @@ if File::ALT_SEPARATOR
     raise "The test:icmp task must be run with elevated security rights"
   end
 else
-  unless Process.euid == 0
-    raise "The test:icmp task must be run with root privileges"
+
+  begin
+    # If we have cap2; raise error unless we are root, or have net_raw
+    require 'cap2'
+    current_process = Cap2.process
+    unless Process.euid == 0 \
+      || current_process.permitted?(:net_raw) \
+      && current_process.enabled?(:net_raw)
+      raise StandardError 'requires root privileges or setcap net_raw'
+    end
+  rescue LoadError
+    # Without cap2; raise error unless we are root
+    unless Process.euid == 0
+      raise StandardError 'requires root privileges or setcap net_raw'
+    end
   end
+
 end
 
 class TC_PingICMP < Test::Unit::TestCase
@@ -134,7 +148,7 @@ class TC_PingICMP < Test::Unit::TestCase
 
   test "timeout works as expected" do
     omit_if(@@jruby)
-    icmp = Net::Ping::ICMP.new('bogus.com', nil, 0.000001)
+    icmp = Net::Ping::ICMP.new('8.8.8.8', nil, 0.000001)
     assert_false(icmp.ping?)
     assert_kind_of(Timeout::Error, icmp.exception)
   end
