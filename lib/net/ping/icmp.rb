@@ -29,15 +29,19 @@ module Net
     #
     def initialize(host=nil, port=nil, timeout=5)
       begin
+        # If we have cap2, but not are root, or have net_raw, raise an error
         require 'cap2'
         current_process = Cap2.process
-        unless Process.euid > 0 \
+        unless Process.euid == 0 \
           || current_process.permitted?(:net_raw) \
           && current_process.enabled?(:net_raw)
           raise StandardError 'requires root privileges or setcap net_raw'
         end
       rescue LoadError
-        raise 'requires root privileges or setcap net_raw' if Process.euid > 0
+        # Without cap2, raise error if we are not root
+        unless Process.euid == 0
+          raise StandardError 'requires root privileges or setcap net_raw'
+        end
       end
 
       if File::ALT_SEPARATOR
@@ -122,7 +126,7 @@ module Net
             io_array = select([socket], nil, nil, timeout)
 
             if io_array.nil? || io_array[0].empty?
-              @exception = "timeout" if io_array.nil?
+              raise Timeout::Error if io_array.nil?
               return false
             end
 
