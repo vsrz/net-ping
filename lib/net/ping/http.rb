@@ -106,7 +106,10 @@ module Net
               break
             end
             redirect = URI.parse(response['location'])
+            port = redirect.port
             redirect = uri + redirect if redirect.relative?
+
+            start_time = Time.now
             response = do_ping(redirect, port)
             rlimit += 1
           end
