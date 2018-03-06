@@ -31,7 +31,8 @@ module Net
 
       case RbConfig::CONFIG['host_os']
         when /linux/i
-          pcmd += ['-c', count.to_s, '-W', timeout.to_s, host, '-i', interval.to_s]
+          pcmd += ['-c', count.to_s, '-W', timeout.to_s, host]
+          pcmd += ['-i', interval.to_s] unless RbConfig::CONFIG['busybox']
         when /aix/i
           pcmd += ['-c', count.to_s, '-w', timeout.to_s, host]
         when /bsd|osx|mach|darwin/i
@@ -111,7 +112,8 @@ module Net
 
       case RbConfig::CONFIG['host_os']
         when /linux/i
-          pcmd += ['-c', count.to_s, '-W', timeout.to_s, host, '-i', interval.to_s]
+          pcmd += ['-c', count.to_s, '-W', timeout.to_s, host]
+          pcmd += ['-i', interval.to_s] unless RbConfig::CONFIG['busybox']
         when /aix/i
           pcmd += ['-c', count.to_s, '-w', timeout.to_s, host]
         when /bsd|osx|mach|darwin/i
