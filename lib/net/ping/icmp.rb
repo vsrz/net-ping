@@ -35,12 +35,12 @@ module Net
         unless Process.euid == 0 \
           || current_process.permitted?(:net_raw) \
           && current_process.enabled?(:net_raw)
-          raise StandardError 'requires root privileges or setcap net_raw'
+          raise StandardError, 'requires root privileges or setcap net_raw'
         end
       rescue LoadError
         # Without cap2, raise error if we are not root
         unless Process.euid == 0
-          raise StandardError 'requires root privileges or setcap net_raw'
+          raise StandardError, 'requires root privileges or setcap net_raw'
         end
       end
 
