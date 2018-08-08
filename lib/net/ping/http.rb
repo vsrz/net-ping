@@ -162,9 +162,9 @@ module Net
         @proxied = http.proxy?
 
         if @get_request == true
-          request = Net::HTTP::Get.new(uri_path)
+          request = Net::HTTP::Get.new(uri_path, headers)
         else
-          request = Net::HTTP::Head.new(uri_path)
+          request = Net::HTTP::Head.new(uri_path, headers)
         end
 
         if uri.scheme == 'https'

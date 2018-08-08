@@ -179,6 +179,7 @@ class TC_Net_Ping_HTTP < Test::Unit::TestCase
   test 'ping with user agent' do
     @http.user_agent = "KDDI-CA32"
     assert_true(@http.ping)
+    assert_equal("KDDI-CA32", FakeWeb.last_request["user-agent"])
   end
 
   test 'redirect_limit accessor is defined' do
