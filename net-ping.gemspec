@@ -3,7 +3,7 @@ require 'rbconfig'
 
 Gem::Specification.new do |spec|
   spec.name      = 'net-ping'
-  spec.version   = '2.0.5'
+  spec.version   = '2.0.6'
   spec.license   = 'Artistic 2.0'
   spec.author    = 'Chris Chernesky'
   spec.email     = 'chris.netping@tinderglow.com'
@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 
     # Used for icmp pings.
     spec.add_dependency('win32-security', '>= 0.2.0')
+    spec.add_dependency('cap2', '>= 0.2.2')
   end
 
   spec.description = <<-EOF
