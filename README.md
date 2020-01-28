@@ -1,9 +1,3 @@
-# Largely unmaintained
-I am finding myself unable, with family and work schedules, to maintain this gem. While I would love to be able to, it's not fair to the community for me to take months sometimes to release fixes.
-
-Please contact me at chris@tinderglow.com or on here if you would like to maintain this gem.
-
-
 # net-ping
 A collection of classes that provide different ways to ping computers.
 
