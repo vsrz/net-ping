@@ -11,6 +11,13 @@ Gem::Specification.new do |spec|
   spec.summary   = 'A ping interface for Ruby.'
   spec.test_file = 'test/test_net_ping.rb'
   spec.files     = Dir['**/*'].reject{ |f| f.include?('git') }
+  spec.metadata = {
+    'bug_tracker_uri' => "#{spec.homepage}/issues",
+    'changelog_uri' => "#{spec.homepage}/blob/master/CHANGES",
+    'documentation_uri' => "https://www.rubydoc.info/gems/#{spec.name}",
+    'homepage_uri' => spec.homepage,
+    'source_code_uri' => spec.homepage
+  }
 
   spec.extra_rdoc_files  = ['README.md', 'CHANGES', 'doc/ping.txt']
 
