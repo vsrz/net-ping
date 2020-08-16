@@ -50,7 +50,7 @@ A collection of classes that provide different ways to ping computers.
 
 ## Contributions
   Although this library is free, please consider having your company
-  setup a gittip if used by your company professionally.
+  set up a gittip if used by your company professionally.
 
   http://www.gittip.com/djberg96/
 
